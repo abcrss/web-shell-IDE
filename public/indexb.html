@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  *{
+    color:#ffffffd9;
+  }
+  body{
+    background-color: #000000d6;
+  }
+
+</style>
+</head>
+<body>
+  <form onsubmit="return addMessage6(this)">
+    <div id="texto6"></div>
+  </form>
+
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io.js"></script>
+<script type="text/javascript">
+  var socket = io.connect('http://127.0.0.1:1212',{'forceNew': true});
+
+socket.on('message6', function(data6) { 
+  document.getElementById('texto6').innerHTML = data6;
+});
+ function addMessage6(e) { 
+  var message6 = document.getElementById('texto6').innerHTML;
+  socket.emit('new-message6', message6); return false; 
+}
+setTimeout(function(){location.reload();},5000);
+</script>
+
+</body>
+</html>

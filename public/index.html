@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>abc-dev</title>
+<style>
+  *{
+    color:#ffffffd9;
+  }
+  body{
+    background-color: #000000d6;
+  }
+  #div{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    min-width: 100vw;
+    min-height: 200vh;
+  }
+  .divs{
+display: flex;
+justify-content: space-around;
+min-width: 65vw;
+min-height: 98vh;
+background-color: #00fbff38;
+flex-direction: column;
+  }
+  .div2{
+    display: flex;
+  }
+  .divs2{
+    display: flex;
+    justify-content: center;
+    background-color: #11111161;
+
+  }
+  textarea{
+background-color: #ff00004f;
+border: transparent;
+color: white;
+min-width: 45vw;
+min-height: 70vh;
+margin-bottom: 0.5rem;
+max-height: 65vh;
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    min-width: 48vw;
+  }
+  input{
+   background-color: #ff00004f;
+    border: transparent; 
+  }
+  iframe{
+    min-width: 33vw;
+display: flex;
+justify-content: center;
+margin-left: 0.3rem;
+  }
+</style>
+</head>
+<body>
+<div id="div">
+
+<div class="div2">
+  <div style="display: flex; position: absolute;">ejemplo1.c</div>
+  <div class="divs">
+  <form onsubmit="return addMessage1(this)">
+    <textarea id="texto1"></textarea>
+    <input type="submit" value="guardar">
+  </form>
+<div class="divs2">
+  <form onsubmit="return addMessage3(this)">
+    <input id="texto3" type="text" style="margin-bottom: 0.5rem;font-size: 18pt;">
+    <input type="submit" value="Ejecutar">
+  </form>
+</div>
+</div>
+<iframe src="indexa.html"></iframe>
+</div>
+<div style="min-width: 100vw;background-color: white;min-height: 2rem;"></div>
+<div class="div2">
+  <div style="display: flex; position: absolute;">ejemplo2.c</div>
+<div class="divs">
+  <form onsubmit="return addMessage2(this)">
+    <textarea id="texto2"></textarea>
+    <input type="submit" value="guardar">
+  </form>
+<div class="divs2">
+  
+  <form onsubmit="return addMessage4(this)">
+    <input id="texto4" type="text" style="margin-bottom: 0.5rem;font-size: 18pt;">
+    <input type="submit" value="Ejecutar">
+  </form>
+</div>
+</div>
+<iframe src="indexb.html"></iframe>
+</div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io.js"></script>
+<script type="text/javascript">
+  var socket = io.connect('http://127.0.0.1:1212',{'forceNew': true});
+socket.on('message1', function(data1) { 
+  document.getElementById('texto1').value = data1;
+});
+socket.on('message2', function(data2) { 
+  document.getElementById('texto2').value = data2;
+});
+ function addMessage1(e) { 
+  var message1 = document.getElementById('texto1').value;
+  socket.emit('new-message1', message1); return false; 
+}
+ function addMessage2(e) { 
+  var message2 = document.getElementById('texto2').value;
+  socket.emit('new-message2', message2); return false; 
+}
+//----------------------------------------------------
+socket.on('message3', function(data3) { 
+  document.getElementById('texto3').value = data3;
+});
+socket.on('message4', function(data4) { 
+  document.getElementById('texto4').value = data4;
+});
+ function addMessage3(e) { 
+  var message3 = document.getElementById('texto3').value;
+  socket.emit('new-message3', message3); return false; 
+}
+ function addMessage4(e) { 
+  var message4 = document.getElementById('texto4').value;
+  socket.emit('new-message4', message4); return false; 
+}
+//-----------------------------------------------------
+
+
+//-----------------------------------------------------
+</script>
+
+</body>
+</html>
+
+<!---
+innerText  innerHTML
+ -->
